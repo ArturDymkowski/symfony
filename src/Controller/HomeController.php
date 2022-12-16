@@ -18,6 +18,7 @@ class HomeController extends AbstractController
     public function list(PostRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $postsQuery = $repository->createQueryBuilder('p')
+            ->orderBy('p.id','desc')
             ->getQuery();
 
         $posts = $paginator->paginate($postsQuery, $request->get('page',1),25);
