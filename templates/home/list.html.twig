@@ -23,8 +23,7 @@
                     <th scope="col">#ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">body</th>
-                    <th scope="col">Author Name</th>
-                    <th scope="col">Author Surame</th>
+                    <th scope="col">Author</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -34,8 +33,7 @@
                             <td> {{ post.id }}</td>
                             <td> {{ post.title }}</td>
                             <td> {{ post.body }}</td>
-                            <td> {{ post.authorName }}</td>
-                            <td> {{ post.authorSurname }}</td>
+                            <td> {{ post.author }}</td>
                             <td><a href="{{ path('delete_post', {post: post.id}) }}" class="text-danger" onclick="return confirm('Jesteś pewien ?');">Usuń</a></td>
                         </tr>
                     {% endfor %}

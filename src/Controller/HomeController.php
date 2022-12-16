@@ -8,9 +8,12 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class HomeController extends AbstractController
 {
@@ -18,7 +21,6 @@ class HomeController extends AbstractController
     public function list(PostRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $postsQuery = $repository->createQueryBuilder('p')
-            ->orderBy('p.id','desc')
             ->getQuery();
 
         $posts = $paginator->paginate($postsQuery, $request->get('page',1),25);
@@ -36,5 +38,12 @@ class HomeController extends AbstractController
         $this->addFlash('info','Usunięto');
 
         return $this->redirectToRoute('list');
+    }
+
+    #[Route(path: "/posts", name: "posts", methods: ["GET"])]
+    public function posts(PostRepository $repository): JsonResponse{
+        $serializer = new Serializer([new ObjectNormalizer()]);
+
+        return new JsonResponse($serializer->normalize($repository->findAll()));
     }
 }

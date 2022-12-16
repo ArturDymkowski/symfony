@@ -21,10 +21,7 @@ class Post
     private ?string $body = null;
 
     #[ORM\Column(length: 191)]
-    private ?string $author_name = null;
-
-    #[ORM\Column(length: 191)]
-    private ?string $author_surname = null;
+    private ?string $author = null;
 
     public function setId(int $id): self
     {
@@ -62,26 +59,14 @@ class Post
         return $this;
     }
 
-    public function getAuthorName(): ?string
+    public function getAuthor(): ?string
     {
-        return $this->author_name;
+        return $this->author;
     }
 
-    public function setAuthorName(string $author_name): self
+    public function setAuthor(string $author): self
     {
-        $this->author_name = $author_name;
-
-        return $this;
-    }
-
-    public function getAuthorSurname(): ?string
-    {
-        return $this->author_surname;
-    }
-
-    public function setAuthorSurname(string $author_surname): self
-    {
-        $this->author_surname = $author_surname;
+        $this->author = $author;
 
         return $this;
     }

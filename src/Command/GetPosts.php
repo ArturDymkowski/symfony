@@ -60,8 +60,7 @@ class GetPosts extends Command
                     $post->setId($content['id']);
                     $post->setTitle($content['title']);
                     $post->setBody($content['body']);
-                    $post->setAuthorName($user_content['name']);
-                    $post->setAuthorSurname($user_content['username']);
+                    $post->setAuthor($user_content['name']);
 
                     $this->postRepository->save($post, true);
                     $progressBar->advance();
